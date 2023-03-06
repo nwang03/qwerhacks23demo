@@ -1,22 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
+  const [clicks, setClicks] = useState(0);
+  const [size, setSize] = useState(200);
+
+  useEffect(() => {
+    if (clicks === 0) setSize(200);
+    else setSize(size + 10);
+  }, [clicks]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h3>
+          Frog size is {size} by {size} pixels
+        </h3>
+        <img
+          src={"https://www.qwerhacks.com/media/frog.svg"}
+          onClick={() => setClicks(clicks + 1)}
+          width={size}
+          height={size}
+        />
+        <p>You have clicked the frog {clicks} times</p>
+        <button onClick={() => setClicks(0)}>Reset</button>
       </header>
     </div>
   );
